@@ -1,0 +1,8 @@
+- name: errors
+  regex: ERROR
+
+- name: criticals
+  regex: CRITICAL
+
+- name: warnings
+  regex: WARNING
