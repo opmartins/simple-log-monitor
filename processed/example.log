@@ -1,0 +1,4 @@
+INFO: service started  
+WARNING: disk space low  
+ERROR: failed to connect to database  
+WARNING: retrying connection  
