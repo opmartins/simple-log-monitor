@@ -1,9 +1,0 @@
-2025-09-14 16:53:49,501 INFO [main] com.example.app.Startup - Application started successfully.
-2025-09-14 16:54:12,123 DEBUG [worker-1] com.example.data.DatabaseManager - Querying for user ID 12345.
-2025-09-14 16:54:15,876 WARN [worker-2] com.example.service.UserService - User profile update for ID 67890 failed due to missing optional field 'address'.
-2025-09-14 16:54:30,456 ERROR [api-thread-3] com.example.api.UserAPI - Failed to process user request /api/v1/users/12345: NullPointerException at com.example.api.UserAPI.getUser(UserAPI.java:55).
-2025-09-14 16:55:01,234 INFO [main] com.example.app.Scheduler - Daily report generation job scheduled.
-2025-09-14 16:55:10,789 DEBUG [scheduler-thread] com.example.report.ReportGenerator - Starting daily report for Q3 2025.
-2025-09-14 16:55:25,901 ERROR [scheduler-thread] com.example.report.ReportGenerator - Report generation failed for company 'Widgets Inc.' due to an invalid data format.
-2025-09-14 16:56:05,111 CRITICAL [worker-5] com.example.data.DatabaseManager - Database connection pool exhausted! No more connections available. Shutting down service.
-2025-09-14 16:56:06,222 INFO [main] com.example.app.ShutdownHook - Application is shutting down.

@@ -1,0 +1,26 @@
+# Arquivos e pastas do ambiente virtual
+venv/
+.env/
+
+# Arquivos compilados e temporários do Python
+*.pyc
+__pycache__/
+
+# Dados temporários de teste e pacotes
+.pytest_cache/
+dist/
+*.egg-info/
+build/
+
+# Arquivos de configurações sensíveis
+.env
+config.ini
+secret.json
+
+# Arquivos de log e banco de dados
+*.log
+*.sqlite3
+
+# Arquivos específicos do sistema operacional
+.DS_Store
+Thumbs.db
