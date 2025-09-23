@@ -33,13 +33,11 @@ def parse_args(argv: Iterable[str]) -> argparse.Namespace:
 
 def load_rules(rules_path: Path) -> List[Tuple[str, re.Pattern[str]]]:
     """Load rules from YAML preserving order and compile regex patterns."""
-    try:
-        with rules_path.open("r", encoding="utf-8") as handle:
-            data = yaml.safe_load(handle)
-    except FileNotFoundError as exc:
-        raise SystemExit(f"Rules file not found: {rules_path}") from exc
-    except yaml.YAMLError as exc:
-        raise SystemExit(f"Unable to parse YAML rules: {exc}") from exc
+    if not rules_path.is_file():
+        raise SystemExit(f"Rules file not found: {rules_path}")
+
+    with rules_path.open("r", encoding="utf-8") as handle:
+        data = yaml.safe_load(handle)
 
     if not isinstance(data, list):
         raise SystemExit("Rules file must contain a list of rule objects")
@@ -51,10 +49,7 @@ def load_rules(rules_path: Path) -> List[Tuple[str, re.Pattern[str]]]:
                 f"Invalid rule at position {index}: expected mapping with a 'regex' key"
             )
         name = str(item.get("name", f"rule_{index}"))
-        try:
-            pattern = re.compile(str(item["regex"]))
-        except re.error as exc:
-            raise SystemExit(f"Invalid regex for rule '{name}': {exc}") from exc
+        pattern = re.compile(str(item["regex"]))
         compiled_rules.append((name, pattern))
 
     if not compiled_rules:
@@ -64,15 +59,15 @@ def load_rules(rules_path: Path) -> List[Tuple[str, re.Pattern[str]]]:
 
 
 def count_matches(log_path: Path, rules: List[Tuple[str, re.Pattern[str]]]) -> Dict[str, int]:
+    if not log_path.is_file():
+        raise SystemExit(f"Log file not found: {log_path}")
+
     counts: Dict[str, int] = OrderedDict((name, 0) for name, _ in rules)
-    try:
-        with log_path.open("r", encoding="utf-8") as handle:
-            for line in handle:
-                for name, pattern in rules:
-                    if pattern.search(line):
-                        counts[name] += 1
-    except FileNotFoundError as exc:
-        raise SystemExit(f"Log file not found: {log_path}") from exc
+    with log_path.open("r", encoding="utf-8") as handle:
+        for line in handle:
+            for name, pattern in rules:
+                if pattern.search(line):
+                    counts[name] += 1
     return counts
 
 

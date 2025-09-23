@@ -1,8 +1,0 @@
-{
-  "file": "example.log",
-  "counts": {
-    "errors": 1,
-    "criticals": 0,
-    "warnings": 2
-  }
-}

@@ -24,3 +24,7 @@ Thumbs.db
 *.swp
 *~
 *.ipynb
+
+#Outputs
+processed/
+metrics/
