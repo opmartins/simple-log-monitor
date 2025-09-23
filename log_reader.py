@@ -15,11 +15,9 @@ regex_patterns = [rule['regex'] for rule in rules]
 filter_pattern = '|'.join(regex_patterns)
 
 
-# This code assumes the file exists and can be accessed
+# Main
 with open(log_file, 'r') as file, open(log_file_saída, 'w') as file_saída:
     for line in file:
         # Verifica se a linha condiz com as regras informadas
         if re.search(filter_pattern, line):
             file_saída.write(line)
-            
-print(f"Filtered log saved to '{log_file_saída}'")

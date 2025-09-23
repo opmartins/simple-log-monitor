@@ -5,4 +5,4 @@
   regex: CRITICAL
 
 - name: warnings
-  regex: WARNING
+  regex: WARN
