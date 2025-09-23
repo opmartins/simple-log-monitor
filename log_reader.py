@@ -1,15 +1,25 @@
 import sys
 import yaml
-
-log_file = sys.argv[1]
-
-with open("rules.yaml", "r") as rules_file:
-    rules = yaml.safe_load(rules_file)
-patterns = [rule["regex"] for rule in rules]
+import re
 
 log_file_saída = 'log_tratado.log'
+log_file = sys.argv[1]
+rules_file = sys.argv[2]
 
+# Abre o arquivo de regras
+with open(rules_file, 'r') as file:
+    rules = yaml.safe_load(file)
+    
+# Extrai as regras
+regex_patterns = [rule['regex'] for rule in rules]
+filter_pattern = '|'.join(regex_patterns)
+
+
+# This code assumes the file exists and can be accessed
 with open(log_file, 'r') as file, open(log_file_saída, 'w') as file_saída:
     for line in file:
-        if any(pattern in line for pattern in patterns):
+        # Verifica se a linha condiz com as regras informadas
+        if re.search(filter_pattern, line):
             file_saída.write(line)
+            
+print(f"Filtered log saved to '{log_file_saída}'")
